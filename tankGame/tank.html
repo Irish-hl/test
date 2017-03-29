@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+	<title>tank</title>
+	<style type="text/css">
+	*{margin: 0px;padding: 0px;}
+	.pic{
+		background:url('image/tank.png') 0px 0px;width:39px;height:39px;position:absolute;
+	}
+	</style>
+</head>
+<body onkeydown="doSomething(event)">
+		<div id="field" style="border:1px black solid;width:500px;height:500px;">
+			<div id="tank" class="pic" >
+			</div>
+			
+		</div> 
+		<h1>用键盘的方向键控制坦克的上下左右转向，空格键可连续发射炮弹，炮弹一旦击中墙壁则弹出警告框失败</h1>
+	<script type="text/javascript" src="js/tank.js"></script>
+</body>
+</html>

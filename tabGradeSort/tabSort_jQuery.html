@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>tabsort</title>
+	<style>
+	body{margin: 0px;padding: 0px;}
+	table,th,td{padding: 1px;border:1px solid black; width:400px;text-align: center;bgcolo}
+	#grade{cursor: pointer;}
+	</style>
+	<script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script type="text/javascript">
+	
+	//Jquery实现
+	$(document).ready(function(){
+			var sort=0;
+		$("#grade").click(function(){
+			var grade_td_arr=[];
+			var tr_arr=[];
+			var td=$("td");
+			var tbody=$("tbody").eq(0);
+			var tbody_tr=$("tr");
+			//alert(tbody_tr.eq(1).html());
+			var td_length=td.length;
+			var index=0;
+			for(var i=0;i<td_length/3;i++)
+			{
+				grade_td_arr.push(td.eq(index*3+2).text());
+				//alert(grade_td_arr[i]);
+				tr_arr.push(tbody_tr.eq(i+1).html());//保存的是字符串而不是节点
+				//alert(tr_arr[i].filter("td").eq(1).html());
+				index++;
+			}
+			if(sort==0)grade_td_arr.sort(function(a,b){
+				return a-b;
+			});
+				else grade_td_arr.sort(function(a,b){
+				return b-a;
+			});
+			$("tbody").empty();
+			for(var i=0;i<td_length/3;i++)
+				for(var j=0;j<td_length/3;j++){
+					if(tr_arr[j].indexOf(grade_td_arr[i])!=-1)
+					//if(tr_arr[j].filter("td").eq(2).text()==grade_td_arr[i])
+					//alert(tr_arr[j]);
+						$("tbody").append("<tr>"+tr_arr[j]+"</tr>");//注意里面没有tr标签
+					//alert(tr_arr[j].filter("td").html());
+				}
+				sort=!sort;
+		});
+	});
+	</script>
+</head>
+<body>
+	<h1>点击表头中的成绩那格，整个表格按从小到大顺序重新排列，再点击从大到小排列</h1>
+	<h3>使用jquery实现</h3>
+	<table>
+		<thead>
+			<tr><th>名字</th><th>性别</th><th id="grade">成绩</th></td>
+		</thead>
+		<tbody>
+		<tr><td>张三</td><td>男</td><td>77</td></tr>
+		<tr><td>李四</td><td>男</td><td>97</td></tr>
+		<tr><td>王五</td><td>女</td><td>88</td></tr>	
+		<tr><td>张三</td><td>男</td><td>13</td></tr>
+		<tr><td>李四</td><td>男</td><td>80</td></tr>
+		<tr><td>王五</td><td>女</td><td>111</td></tr>			
+		</tbody>
+	</table>
+
+</body>
+</html>

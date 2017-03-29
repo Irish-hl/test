@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>tabsort</title>
+	<style>
+	body{margin: 0px;padding: 0px;}
+	table,th,td{padding: 1px;border:1px solid black; width:400px;text-align: center;bgcolo}
+	#grade{cursor: pointer;}
+	</style>
+		<script type="text/javascript">
+	window.onload=function(){
+		var grade=document.getElementById("grade");
+		var tbody=document.getElementsByTagName("tbody")[0];
+		var tbody_tr=tbody.getElementsByTagName("tr");
+		var temp_tr_arr=[];//存放成绩那列的分数
+		var grade_arr=[];//存放每行的结节信息
+		var sort=0;
+		for(var i=0;i<tbody_tr.length;i++)
+				{
+					temp_tr_arr.push(tbody_tr[i].cloneNode(true));
+				grade_arr.push(tbody_tr[i].getElementsByTagName("td")[2].innerHTML);
+			}
+		
+			var length=tbody_tr.length;
+		grade.onclick=function(){
+			//grade.style.background="red";
+			//alert(length);
+				if(sort==0)grade_arr.sort(function(a,b){return a-b;});//从小到大排序，注意无参数是按字符编码的顺序进行排序
+				else grade_arr.sort(function(a,b){return b-a;});//从大到小排序
+				//for(var i=0;i<length;i++)
+					//alert(grade_arr[i]);
+			for(var i=0;i<length;i++)
+			{
+				//alert(tr[1].parentNode.nodeName);
+				//alert(tr[1]);
+				tbody.removeChild(tbody_tr[0]);//删掉当前所有除表头行以外的行
+			}
+				for(var i=0;i<grade_arr.length;i++)
+				for(var j=0;j<temp_tr_arr.length;j++)
+				{
+					if(temp_tr_arr[j].getElementsByTagName("td")[2].innerHTML==grade_arr[i])
+						tbody.appendChild(temp_tr_arr[j]);//添加重新排好序的行节点
+				}		
+				sort=!sort;//正序/倒序
+		}	
+	}
+	</script>
+</head>
+<body>
+	<h1>点击表头中的成绩那格，整个表格按从小到大顺序重新排列，再点击从大到小排列</h1>
+	<h3>使用js实现</h3>
+	<table>
+		<thead>
+			<tr><th>名字</th><th>性别</th><th id="grade">成绩</th></td>
+		</thead>
+		<tbody>
+		<tr><td>张三</td><td>男</td><td>77</td></tr>
+		<tr><td>李四</td><td>男</td><td>97</td></tr>
+		<tr><td>王五</td><td>女</td><td>88</td></tr>	
+		<tr><td>张三</td><td>男</td><td>13</td></tr>
+		<tr><td>李四</td><td>男</td><td>80</td></tr>
+		<tr><td>王五</td><td>女</td><td>111</td></tr>			
+		</tbody>
+	</table>
+
+</body>
+</html>
